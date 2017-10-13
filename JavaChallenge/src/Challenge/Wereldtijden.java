@@ -8,7 +8,8 @@ public class Wereldtijden extends Applet {
     TextField Text;
     Button button;
     Label label;
-    int input, b, c, d, f;
+    int time, b, c, d, f;
+    String input;
 
     public void init() {
 
@@ -16,7 +17,6 @@ public class Wereldtijden extends Applet {
         button = new Button(" Toon wereld tijden");
         button.addActionListener(new ButtonListener());
         label = new Label("Voer een uur in");
-
 
         add(label);
         add(Text);
@@ -26,13 +26,13 @@ public class Wereldtijden extends Applet {
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String invoer = Text.getText();
-            input = Integer.parseInt(invoer);
+            input = Text.getText();
+            time = Integer.parseInt(input);
 
-            b = input - 1;
-            c = input + 8;
-            d = input - 9;
-            f = input + 9;
+            b = time - 1;
+            c = time + 8;
+            d = time - 9;
+            f = time + 9;
             if(b >=24){
                 b-=24;}
             if(c >=24){
@@ -57,11 +57,14 @@ public class Wereldtijden extends Applet {
 
     public void paint(Graphics g) {
         {
-            if (input >= 0 && input <=23 ){
+            if (time >= 0 && time < 24 ){
                 g.drawString("Tijd in London : " + b + ":00 uur", 50, 60);
                 g.drawString("Tijd in Tokyo : " + c + ":00 uur", 50, 70 );
                 g.drawString("Tijd in LA : " + d + ":00 uur", 50, 80);
                 g.drawString("Tijd in Sydney : " + f + ":00 uur", 50, 90);
+            }
+            else{
+                g.drawString("Deze tijd is niet geldig", 50, 60);
             }
         }
     }
